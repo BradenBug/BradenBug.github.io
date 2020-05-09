@@ -1,4 +1,4 @@
-ws = new WebSocket('3.21.39.82:5000');
+ws = new WebSocket('ws://3.21.39.82:5000');
 
 var curentTempF = 0;
 var curentTempC = 0;
