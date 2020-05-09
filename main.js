@@ -4,8 +4,6 @@ var curentTempF = 0;
 var curentTempC = 0;
 
 ws.onmessage = (message) => {
-    console.log(message);
-    console.log(message.data);
     var json = JSON.parse(message.data);
     currentTempF = json.f;
     currentTempC = json.c;
