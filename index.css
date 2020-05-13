@@ -1,0 +1,9 @@
+html, body, main, .card, .card-body{
+    height: 100vh;
+    height: 100%;
+}
+
+.list-group {
+    max-height: 200px;
+    overflow-y: auto;
+}
