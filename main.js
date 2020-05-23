@@ -17,6 +17,10 @@ const escMap = new Map([
 
 const ws = new WebSocket(host + ':' + port);
 
+$(document).ready(() =>{
+    $('#fbutton').addClass('active');
+});
+
 $('#username-form').on('submit', requestUsername);
 $('#fbutton').on('click', () => selectTemp(currentTempF));
 $('#cbutton').on('click', () => selectTemp(currentTempC));
