@@ -4,6 +4,7 @@ var curentTempF = 80;
 var curentTempC = 26.7;
 var userList = [];
 var userListUpdated = false;
+var scrollDown = true;
 const escMap = new Map([
     ['&', '&amp;'],
     ['<', '&lt;'], 
@@ -20,6 +21,7 @@ $('#username-form').on('submit', requestUsername);
 $('#fbutton').on('click', () => selectTemp(currentTempF));
 $('#cbutton').on('click', () => selectTemp(currentTempC));
 $('#chat-button').on('click', sendMessage);
+$('#chatbox').on('scroll', setChatScroll);
 $('#user-list-button').on('click', createUserListView);
 
 ws.onmessage = (message) => {
@@ -44,6 +46,9 @@ function requestUsername() {
 
 function selectTemp(currentTemp) {
     $('#temp').text(`${currentTemp}`);
+    // get rid of the focus
+    $('#fbutton').blur();
+    $('#cbutton').blur();
 }
 
 function sendMessage() {
@@ -52,6 +57,15 @@ function sendMessage() {
         ws.send(constructMessage('message', message)); 
         $('#chat-input').val('');
         $('#chat-input').focus();
+    }
+}
+
+function setChatScroll() {
+    if ($('#chatbox').scrollTop() + $('#chatbox').innerHeight()
+        >= $('#chatbox')[0].scrollHeight) {
+        scrollDown = true;
+    } else {
+        scrollDown = false;
     }
 }
 
@@ -90,7 +104,10 @@ const updateChat = (chatData) => {
         + `<p style="color: ${chatData.color}">${chatData.username}:&nbsp;</p>`
         + `<p>${chatData.message}</p>`
         + `</div>`);
-    $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight);
+    // scroll to the bottom if not scrolled up
+    if (scrollDown) {
+        $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight);
+    }
 }
 
 const updateUserData = (newUserList) => {
