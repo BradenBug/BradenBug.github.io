@@ -17,7 +17,7 @@ const escMap = new Map([
 
 const ws = new WebSocket(host + ':' + port);
 
-$(document).ready(() =>{
+$(document).ready(function() {
     $('#fbutton').addClass('active');
 });
 
