@@ -1,5 +1,5 @@
-const host = 'ws://3.21.39.82';
-const port = '5000';
+const host = 'wss://api.bradensoventemperature.com';
+const port = '443';
 var curentTempF = 80;
 var curentTempC = 26.7;
 var userList = [];
@@ -29,6 +29,7 @@ $('#chatbox').on('scroll', setChatScroll);
 $('#user-list-button').on('click', createUserListView);
 
 ws.onmessage = (message) => {
+    console.log(message);
     var jsonMessage = JSON.parse(message.data);
 
     if (jsonMessage['type'] === 'userAck') {
