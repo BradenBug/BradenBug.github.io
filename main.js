@@ -17,30 +17,34 @@ const escMap = new Map([
 
 const ws = new WebSocket(host + ':' + port);
 
-$(document).ready(function() {
-    $('#fbutton').addClass('active');
-});
+// $(document).ready(function() {
+//     $('#fbutton').addClass('active');
+// });
 
-$('#username-form').on('submit', requestUsername);
-$('#fbutton').on('click', () => selectTemp(currentTempF));
-$('#cbutton').on('click', () => selectTemp(currentTempC));
-$('#chat-button').on('click', sendMessage);
-$('#chatbox').on('scroll', setChatScroll);
-$('#user-list-button').on('click', createUserListView);
+// $('#username-form').on('submit', requestUsername);
+// $('#fbutton').on('click', () => selectTemp(currentTempF));
+// $('#cbutton').on('click', () => selectTemp(currentTempC));
+// $('#chat-button').on('click', sendMessage);
+// $('#chatbox').on('scroll', setChatScroll);
+// $('#user-list-button').on('click', createUserListView);
 
 ws.onmessage = (message) => {
     console.log(message);
     var jsonMessage = JSON.parse(message.data);
 
-    if (jsonMessage['type'] === 'userAck') {
-        validateUsername(jsonMessage['data']);
-    } else if (jsonMessage['type'] === 'temp') {
+    if (jsonMessage['type'] == 'temp') {
         updateTemp(jsonMessage['data']);
-    } else if (jsonMessage['type'] === 'chat') {
-        updateChat(jsonMessage['data']);
-    } else if (jsonMessage['type'] === 'userList') {
-        updateUserData(jsonMessage['data']);
     }
+
+    // if (jsonMessage['type'] === 'userAck') {
+    //     validateUsername(jsonMessage['data']);
+    // } else if (jsonMessage['type'] === 'temp') {
+    //     updateTemp(jsonMessage['data']);
+    // } else if (jsonMessage['type'] === 'chat') {
+    //     updateChat(jsonMessage['data']);
+    // } else if (jsonMessage['type'] === 'userList') {
+    //     updateUserData(jsonMessage['data']);
+    // }
 }
 
 function requestUsername() {
