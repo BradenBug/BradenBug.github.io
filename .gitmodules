@@ -1,0 +1,3 @@
+[submodule "oven-temp-repo"]
+	path = oven-temp-repo
+	url = https://github.com/BradenBug/oven-temp.git
